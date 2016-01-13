@@ -132,11 +132,12 @@
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="FormCreator.cs" />
+    <Compile Include="FormModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ExpenseAuthorizeAttribute.cs" />
+    <Compile Include="Helpers\FormHelper.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Models\Expense.cs">
       <DependentUpon>Expenses.tt</DependentUpon>

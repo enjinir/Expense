@@ -31,6 +31,12 @@ namespace Expense.Controllers
         [HttpPost]
         public ActionResult Create(Models.Expense expense)
         {
+            ExpenseEntities db = new ExpenseEntities();
+            Form form = (Form)db.Forms.Where(f => f.Id == expense.FormId );
+           
+            ///Find form whichs id = expense.ownerid and use it ..
+            ///blah blah
+
             
          
             return View();
