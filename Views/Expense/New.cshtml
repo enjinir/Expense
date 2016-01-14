@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "New";
+}
+
+
+<form class="form-horizontal" name="new-expense-form" id="new-expense-form" action='@Url.Action("Save", "Expense")' method="POST" enctype="multipart/form-data">
+    <fieldset>
+        <legend>New Expense Form</legend>
+        <div id="newForm">
+            <label class="col-md-2 control-label">Form Name</label>
+            <input name="formName" id="formName" type="text" placeholder="Form name.." class="form-control input-md" />
+        </div>
+        <div id="expenses">
+            <div class="expense">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Expense Name</label>
+                    <div class="col-md-4">
+                        <input name="name[]" type="text" placeholder="Write your expenses name.." class="form-control input-md">
+                    </div> 
+
+                    <label class="col-md-2 control-label">Date</label>
+                    <div class="col-md-4">
+                       <input type="date" name="date[]" class="form-control input-md">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Description</label>
+                    <div class="col-md-4">
+                        <textarea class="form-control" name="description[]"></textarea>
+                    </div>
+
+                    <label class="col-md-2 control-label">Cost</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input name="cost[]" type="text" placeholder="20.00" class="form-control input-md cost"><span class="input-group-addon">TL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2 pull-right">
+                <button id="buttonAdd" name="buttonAdd" class="btn btn-success" type="button" value="1"><span class="glyphicon glyphicon-plus"></span>Add</button>
+                <button id="buttonSave" name="buttonSave" class="btn btn-primary" type="submit" value="1"><span class="glyphicon glyphicon-check"></span>Save</button>
+            </div>
+            <div class="col-md-3 pull-right">
+                <div class="input-group">
+                    <span class="input-group-addon">Total : </span>
+                    <input id="totalCost" name="totalCost" type="text" placeholder="0.00" class="form-control input-md" disabled>
+                    <span class="input-group-addon">TL</span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    
+
+</form>
+
+ @section scripts{
+    <script src="~/Scripts/new_expense.js"></script>
+ }

@@ -13,6 +13,7 @@ namespace Expense.Helpers
                 System.Web.HttpContext.Current.Session[key] = obj;
             }
 
+
             public static void Delete(string key)
             {
                 System.Web.HttpContext.Current.Session[key] = null;
@@ -25,6 +26,7 @@ namespace Expense.Helpers
                 else
                     return false;
             }
+          
 
             public static object Get(string key)
             {
@@ -33,6 +35,7 @@ namespace Expense.Helpers
                 else
                     return null;
             }
+           
 
             public static class Keys
             {
@@ -42,6 +45,7 @@ namespace Expense.Helpers
                 public const string RoleName = "RoleName";
                 public const string FullName = "FullName";
                 public const string LoggedIn = "LoggedIn";
+                public const string AuthorizeLevel = "AuthorizeLevel";
             }
         }
 }

@@ -1,0 +1,29 @@
+﻿@using Expense.Helpers;
+@{
+    Menu menu = ViewBag.Menu;
+}
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">Expenses</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav">                
+                @foreach (var menuItem in menu.Items)
+                {
+                    <li>
+                        @Html.ActionLink(menuItem.Text, menuItem.ActionName, menuItem.ControllerName, menuItem.RouteValues)
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+</div>

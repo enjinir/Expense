@@ -8,7 +8,7 @@ using Expense.Helpers;
 
 namespace Expense.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         //
         // GET: /User/
@@ -37,6 +37,7 @@ namespace Expense.Controllers
                 SessionManager.Register(SessionManager.Keys.Username, user.Username);
                 SessionManager.Register(SessionManager.Keys.RoleName, user.Role.Name);
                 SessionManager.Register(SessionManager.Keys.LoggedIn, true);
+                SessionManager.Register(SessionManager.Keys.AuthorizeLevel, user.Role.AuthorizeLevel);
 
                 return RedirectToAction("Index","Home");
             }

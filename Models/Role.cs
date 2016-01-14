@@ -21,6 +21,7 @@ namespace Expense.Models
     
         public System.Guid Id { get; set; }
         public string Name { get; set; }
+        public int AuthorizeLevel { get; set; }
     
         public virtual ICollection<User> Users { get; set; }
     }

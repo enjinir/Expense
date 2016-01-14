@@ -59,3 +59,7 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+.page-body {
+    margin: 75px 25px;
+}
