@@ -88,6 +88,54 @@ namespace Expense.Controllers
             return RedirectToAction("New","Expense");
         }
 
+        [ExpenseAuthorize]
+        public ActionResult List(Guid id)
+        { 
+            ExpenseEntities db = new ExpenseEntities();
+            IEnumerable<Expense.Models.Expense> expenses = db.Expenses.Where(e => e.FormId.Equals(id)).AsEnumerable();
+            return View(
+                new ExpenseViewModel()
+                {
+                    AuthLevel = (SessionManager.Get(SessionManager.Keys.AuthorizeLevel) ?? string.Empty).ToString(),
+                    Expenses = expenses,
+                    FormId = id
+                }
+            );       
+        }
+
+        [ExpenseAuthorize]
+        public ActionResult Approve(Guid id)
+        {
+            Models.Expense expense = new Models.Expense();
+            ExpenseEntities db = new ExpenseEntities();
+            expense = db.Expenses.Where(e => e.Id == id).FirstOrDefault();
+            State state = db.States.Where(s => s.Name == "Approved").FirstOrDefault();
+            expense.StateId = state.Id;
+            Guid formId = expense.FormId;
+            db.SaveChanges();
+
+            return RedirectToAction("List", "Expense", new {id=formId});
+        }
+
+        [ExpenseAuthorize]
+        public ActionResult Reject(Guid id)
+        {
+            Models.Expense expense = new Models.Expense();
+            ExpenseEntities db = new ExpenseEntities();
+            expense = db.Expenses.Where(e => e.Id == id).FirstOrDefault();
+            State state = db.States.Where(s => s.Name == "Reject").FirstOrDefault();
+            expense.StateId = state.Id;
+            Guid formId = expense.FormId;
+            db.SaveChanges();
+
+            return RedirectToAction("List", "Expense", new { id = formId });
+        }
+
+       
+
+
+      
+
        
     }
 }

@@ -161,6 +161,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Expenses.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExpenseViewModel.cs" />
     <Compile Include="Models\Form.cs">
       <DependentUpon>Expenses.tt</DependentUpon>
     </Compile>
@@ -286,6 +287,10 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Expense\New.cshtml" />
+    <Content Include="Views\Expense\List.cshtml" />
+    <Content Include="Views\Form\ApprovedList.cshtml" />
+    <Content Include="Views\Form\Reject.cshtml" />
+    <Content Include="Views\Form\RejectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

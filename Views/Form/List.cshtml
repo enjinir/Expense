@@ -2,57 +2,46 @@
 
 
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ManagerDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th></th>
-    </tr>
-
+<h3>Forms</h3>
+<hr class="style-seven" />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            
+            <th>Form Name</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Total Cost</th>
+            <th>State</th>
+            <th>Actions</th>
+            
+        </tr>
+    </thead>
 @foreach (var item in Model)
 {
- 
-      	<tr>
+ <tr>
+        
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
+           @item.Name
         </td>
        
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @item.Date
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ManagerDescription)
+            @item.Description
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.Total)
+            @item.Total
         </td>
+         <td>
+             @item.State.Name
+         </td>
      
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("View", "List", "Expense", new { id=item.Id }, null)
+           
         </td>
     </tr> 
 

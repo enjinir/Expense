@@ -63,3 +63,29 @@ textarea {
 .page-body {
     margin: 75px 25px;
 }
+
+.form-group {
+    text-align: left !important;
+}
+
+.table {
+  border: 1px solid;
+}
+
+hr.style-seven {
+    height: 30px;
+    border-style: solid;
+    border-color: #808080;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr.style-seven:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: #808080;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}

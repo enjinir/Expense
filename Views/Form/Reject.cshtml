@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Reject";
+}
+@model Expense.Models.Form
+
+<h2>Reject</h2>
+
+
+<form class="form-horizontal" name="reject-form" id="reject-form" action='@Url.Action("Reject", "Form", new {id=@Model.Id})' method="POST" enctype="multipart/form-data">
+    <div id="form">
+        <h4>Please write a description for : "@Model.Name"</h4>
+        <input id="rejectText" name="rejectText" type="text" placeholder="Manager description" class="form-control input-md"  />
+        <button id="buttonReject" name="buttonReject" class="btn btn-danger" type="submit" value="0"><span class="glyphicon glyphicon-remove"></span>Reject Form</button>
+
+    </div>
+
+
+</form>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Expense.Models.Form>
+
+
+
+<h3>Forms</h3>
+<hr class="style-seven" />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+
+            <th>Form Name</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Manager Description</th>
+            <th>State</th>
+            <th>Total Cost</th>
+            
+
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @item.Name
+            </td>
+
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.ManagerDescription
+            </td>
+            <td>
+                @item.State.Name
+            </td>
+
+            <td>
+                @item.Total
+            </td>
+
+          
+        </tr>
+
+    }
+
+</table>

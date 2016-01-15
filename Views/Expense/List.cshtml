@@ -1,0 +1,81 @@
+﻿@using Expense.Models;
+@using Expense.Helpers;
+@model ExpenseViewModel
+
+@{
+    ViewBag.Title = "List";
+}
+<head>
+    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<h2>Expense List</h2>
+
+
+<table class="table table-bordered">
+   <thead>
+       <tr>
+       <th>Name</th>
+       <th>Date</th>
+       <th>Description</th>
+       <th>State</th>
+       <th>Cost</th>
+        @if (Model.AuthLevel.Equals(AuthorizeLevels.Administrator.ToString()) || Model.AuthLevel.Equals(AuthorizeLevels.Manager.ToString()))
+        {
+            <th>Actions</th>
+        }
+       </tr>
+   </thead>
+
+@foreach (var item in Model.Expenses) {
+    <tr>
+        <td>
+          @item.Name
+        </td>
+        <td>
+            @item.Date
+        </td>
+        <td>
+            @item.Description
+        </td>
+        <td>
+            @item.State.Name
+        </td>
+        <td>
+            @item.Cost
+        </td>
+
+        @if (Model.AuthLevel.Equals(AuthorizeLevels.Administrator.ToString()) || Model.AuthLevel.Equals(AuthorizeLevels.Manager.ToString()))
+        {
+            <td>
+                @Html.ActionLink("Approve", "Approve", "Expense", new { id=item.Id },null) |
+                @Html.ActionLink("Reject", "Reject", "Expense",new { id=item.Id },null)
+            </td>
+        }        
+       
+    </tr>
+    
+}
+
+</table>
+
+@if (Model.AuthLevel.Equals(AuthorizeLevels.Administrator.ToString()) || Model.AuthLevel.Equals(AuthorizeLevels.Manager.ToString()))
+{
+    <div class="form-group">
+        <div class="col-lg-4 pull-right">
+            <button id="buttonApprove" name="buttonApprove" onclick="location.href='@Url.Action("Approve", "Form", new {id=Model.FormId})'" class="btn btn-success" type="submit" value="1"><span class="glyphicon glyphicon-ok"></span>Approve Form</button>
+            <button id="buttonReject" name="buttonReject" onclick="location.href='@Url.Action("Reject", "Form", new {id=Model.FormId})'" class="btn btn-danger" type="submit" value="0"><span class="glyphicon glyphicon-remove"></span>Reject Form</button>
+        </div>
+    </div>
+}
+
+@if (Model.AuthLevel.Equals(AuthorizeLevels.Accountant.ToString()))
+{
+    <div class="form-group">
+        <div class="col-lg-2 pull-right">
+            <button id="buttonApprove" name="buttonApprove" onclick="location.href='@Url.Action("Pay", "Form", new {id=Model.FormId})'" class="btn btn-success" type="submit" value="1"><span class="glyphicon glyphicon-ok"></span>Pay Form</button>
+        </div>
+    </div>
+}

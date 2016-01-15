@@ -19,8 +19,13 @@
                 @foreach (var menuItem in menu.Items)
                 {
                     <li>
-                        @Html.ActionLink(menuItem.Text, menuItem.ActionName, menuItem.ControllerName, menuItem.RouteValues)
+                        @Html.ActionLink(menuItem.Text, menuItem.ActionName, menuItem.ControllerName)
                     </li>
+                }
+                @if(SessionManager.Check(SessionManager.Keys.LoggedIn))
+                { 
+                    
+                <li class="nav pull-right">@Html.ActionLink("Logout", "Logout", "User")</li>
                 }
             </ul>
 

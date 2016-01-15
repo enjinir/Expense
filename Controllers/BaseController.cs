@@ -14,6 +14,7 @@ namespace Expense.Controllers
         public BaseController()
         {
             InitializeMenu();
+            
         }
 
         private void InitializeMenu()
@@ -23,10 +24,40 @@ namespace Expense.Controllers
 
             if (SessionManager.Check("LoggedIn"))
             {
-                //User
-                if ((int)(SessionManager.Get(SessionManager.Keys.AuthorizeLevel)) == AuthorizeLevels.Administrator)
+
+                //Admin
+                if ( (int)(SessionManager.Get(SessionManager.Keys.AuthorizeLevel)) == AuthorizeLevels.Administrator)
                 {
                     Menu.Add(new MenuItem("Home", "Index", "Home"));
+                    Menu.Add(new MenuItem("Forms", "List","Form"));
+                    Menu.Add(new MenuItem("Add Expense", "New", "Expense"));
+                    Menu.Add(new MenuItem("Approved", "ApprovedList", "Form"));
+                    Menu.Add(new MenuItem("Rejected", "RejectList", "Form"));
+
+                }
+
+                //User
+                if ((int)(SessionManager.Get(SessionManager.Keys.AuthorizeLevel)) == AuthorizeLevels.User)
+                {
+                    Menu.Add(new MenuItem("Home", "Index", "Home"));
+                    Menu.Add(new MenuItem("Add Expense", "New", "Expense", null));
+                    Menu.Add(new MenuItem("Forms", "List", "Form"));
+                    Menu.Add(new MenuItem("Approved", "ApprovedList", "Form"));
+
+                }
+                //Accountant
+                if ((int)(SessionManager.Get(SessionManager.Keys.AuthorizeLevel)) == AuthorizeLevels.Accountant)
+                {
+                    Menu.Add(new MenuItem("Home", "Index", "Home"));
+                    Menu.Add(new MenuItem("Forms", "ApprovedList", "Form"));
+                }
+
+                //Manager
+                if ((int)(SessionManager.Get(SessionManager.Keys.AuthorizeLevel)) == AuthorizeLevels.Manager)
+                {
+                    Menu.Add(new MenuItem("Home", "Index", "Home"));
+                    Menu.Add(new MenuItem("Forms", "List", "Form"));
+                    Menu.Add(new MenuItem("Approved", "ApprovedList", "Form"));
                 }
             }
 

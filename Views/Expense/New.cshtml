@@ -6,11 +6,15 @@
 <form class="form-horizontal" name="new-expense-form" id="new-expense-form" action='@Url.Action("Save", "Expense")' method="POST" enctype="multipart/form-data">
     <fieldset>
         <legend>New Expense Form</legend>
-        <div id="newForm">
-            <label class="col-md-2 control-label">Form Name</label>
-            <input name="formName" id="formName" type="text" placeholder="Form name.." class="form-control input-md" />
-        </div>
         <div id="expenses">
+            <div class="form-group form-info">
+                <div class="col-md-1 placeholder"></div>
+                <label for="formName" class="col-md-1 control-label">Form Name</label>
+                <div class="col-md-10">
+                    <input name="formName" id="formName" type="text" placeholder="Form name.." class="form-control input-md" />
+                </div>
+            </div>
+
             <div class="expense">
                 <div class="form-group">
                     <label class="col-md-2 control-label">Expense Name</label>
