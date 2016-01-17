@@ -93,12 +93,14 @@ namespace Expense.Controllers
         { 
             ExpenseEntities db = new ExpenseEntities();
             IEnumerable<Expense.Models.Expense> expenses = db.Expenses.Where(e => e.FormId.Equals(id)).AsEnumerable();
+            Form form =  db.Forms.Where(f=> f.Id == id).FirstOrDefault();
             return View(
                 new ExpenseViewModel()
                 {
                     AuthLevel = (SessionManager.Get(SessionManager.Keys.AuthorizeLevel) ?? string.Empty).ToString(),
                     Expenses = expenses,
-                    FormId = id
+                    FormId = id,
+                    FormState =form.State.Name
                 }
             );       
         }

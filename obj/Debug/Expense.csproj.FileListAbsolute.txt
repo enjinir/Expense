@@ -29,3 +29,4 @@ C:\Users\eyucesoy\Documents\GitHub\Expense\Expense\bin\System.Web.WebPages.Deplo
 C:\Users\eyucesoy\Documents\GitHub\Expense\Expense\bin\System.Web.WebPages.Razor.xml
 C:\Users\eyucesoy\Documents\GitHub\Expense\Expense\obj\Debug\Expense.dll
 C:\Users\eyucesoy\Documents\GitHub\Expense\Expense\obj\Debug\Expense.pdb
+C:\Users\eyucesoy\Documents\GitHub\Expense\Expense\obj\Debug\Expense.csprojResolveAssemblyReference.cache

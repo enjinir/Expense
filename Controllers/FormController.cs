@@ -37,8 +37,9 @@ namespace Expense.Controllers
                 if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.Manager)
                 {
                     forms = db.Forms
-                                .Where(f => f.OwnerId == userId
-                                            || f.User.ManagerId == userId)
+                                .Where(f => (f.OwnerId == userId
+                                            || f.User.ManagerId == userId) 
+                                            && f.State.Name != "Paid")
                                             .ToList();
                 }
 
@@ -52,7 +53,8 @@ namespace Expense.Controllers
                 if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.Accountant)
                 {
                     forms = db.Forms
-                                .Where(f => f.State.Name == "Approved").ToList();
+                                .Where(f => f.State.Name == "Approved")
+                                .ToList();
                 }
                                             
                 
@@ -94,6 +96,41 @@ namespace Expense.Controllers
             
             return View(forms);
 
+        }
+
+        public ActionResult PaidList()
+        {
+            IEnumerable<Form> forms = null;
+            ExpenseEntities db = new ExpenseEntities();
+
+            State state = db.States.Where(s => s.Name == "Paid").FirstOrDefault();
+            Guid userId = Guid.Parse(SessionManager.Get(SessionManager.Keys.UserId).ToString());
+
+
+            if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.Accountant)
+            {
+                forms = db.Forms.Where(f => f.StateId.Equals(state.Id)).ToList();
+            }
+
+            if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.User)
+            {
+                forms = db.Forms.Where(f => f.StateId.Equals(state.Id)
+                                       && f.OwnerId == userId).ToList();
+            }
+            if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.Administrator)
+            {
+                forms = db.Forms.Where(f => f.StateId.Equals(state.Id)).ToList();
+            }
+            if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.Manager)
+            {
+                forms = db.Forms.Where(f => f.StateId.Equals(state.Id) &&
+                                        f.User.ManagerId == userId).ToList();
+            }
+
+
+
+            return View(forms);
+        
         }
 
         [ExpenseAuthorize]
@@ -143,6 +180,7 @@ namespace Expense.Controllers
             Expense.Models.Form form = new Expense.Models.Form();
             ExpenseEntities db = new ExpenseEntities();
             form = db.Forms.Where(f=> f.Id == id).FirstOrDefault();
+      
             return View(form);
         }
 
@@ -152,8 +190,17 @@ namespace Expense.Controllers
             Expense.Models.Form form = new Expense.Models.Form();
             ExpenseEntities db = new ExpenseEntities();
             form = db.Forms.Where(f=> f.Id == id).FirstOrDefault();
+            IEnumerable<Models.Expense> expenses = db.Expenses.Where(e => e.FormId == id).ToList();
             form.ManagerDescription = rejectText;
             State state = db.States.Where(s=> s.Name == "Reject").FirstOrDefault();
+            foreach (Models.Expense e in expenses)
+            {
+                if (e.State.Name != "Approved")
+                {
+                    e.StateId = state.Id;
+                }
+            
+            }
             form.StateId = state.Id;
             db.SaveChanges();
 
@@ -168,8 +215,26 @@ namespace Expense.Controllers
             State state = db.States.Where(s => s.Name == "Reject").FirstOrDefault();
             Guid userId = Guid.Parse(SessionManager.Get(SessionManager.Keys.UserId).ToString());
 
-            forms = db.Forms.Where(f => f.State.Id == state.Id).ToList();
+            if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.Administrator)
+            {
+                forms = db.Forms.Where(f => f.State.Id == state.Id).ToList();
+            }
 
+            if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.User)
+            {
+                forms = db.Forms.Where(f => f.State.Id == state.Id
+                                        && f.OwnerId == userId )
+                                        .ToList();
+            }
+            if ((int)SessionManager.Get(SessionManager.Keys.AuthorizeLevel) == AuthorizeLevels.Manager)
+            {
+                forms = db.Forms.Where(f => f.State.Id == state.Id
+                                       && f.User.ManagerId == userId)
+                                       .ToList();
+            }
+
+
+            
             return View(forms);
 
         }

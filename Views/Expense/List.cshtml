@@ -22,10 +22,7 @@
        <th>Description</th>
        <th>State</th>
        <th>Cost</th>
-        @if (Model.AuthLevel.Equals(AuthorizeLevels.Administrator.ToString()) || Model.AuthLevel.Equals(AuthorizeLevels.Manager.ToString()))
-        {
-            <th>Actions</th>
-        }
+       
        </tr>
    </thead>
 
@@ -47,13 +44,7 @@
             @item.Cost
         </td>
 
-        @if (Model.AuthLevel.Equals(AuthorizeLevels.Administrator.ToString()) || Model.AuthLevel.Equals(AuthorizeLevels.Manager.ToString()))
-        {
-            <td>
-                @Html.ActionLink("Approve", "Approve", "Expense", new { id=item.Id },null) |
-                @Html.ActionLink("Reject", "Reject", "Expense",new { id=item.Id },null)
-            </td>
-        }        
+       
        
     </tr>
     
@@ -63,12 +54,18 @@
 
 @if (Model.AuthLevel.Equals(AuthorizeLevels.Administrator.ToString()) || Model.AuthLevel.Equals(AuthorizeLevels.Manager.ToString()))
 {
+    if (Model.FormState != "Approved")
+    { 
     <div class="form-group">
         <div class="col-lg-4 pull-right">
-            <button id="buttonApprove" name="buttonApprove" onclick="location.href='@Url.Action("Approve", "Form", new {id=Model.FormId})'" class="btn btn-success" type="submit" value="1"><span class="glyphicon glyphicon-ok"></span>Approve Form</button>
-            <button id="buttonReject" name="buttonReject" onclick="location.href='@Url.Action("Reject", "Form", new {id=Model.FormId})'" class="btn btn-danger" type="submit" value="0"><span class="glyphicon glyphicon-remove"></span>Reject Form</button>
+            <button id="buttonApprove" name="buttonApprove" onclick="location.href='@Url.Action("Approve", "Form", new { id = Model.FormId })'" class="btn btn-success" type="submit" value="1"><span class="glyphicon glyphicon-ok"></span>Approve Form</button>
+            @if(Model.FormState != "Reject")
+            {
+            <button id="buttonReject" name="buttonReject" onclick="location.href='@Url.Action("Reject", "Form", new { id = Model.FormId })'" class="btn btn-danger" type="submit" value="0"><span class="glyphicon glyphicon-remove"></span>Reject Form</button>
+            }
         </div>
     </div>
+    }
 }
 
 @if (Model.AuthLevel.Equals(AuthorizeLevels.Accountant.ToString()))

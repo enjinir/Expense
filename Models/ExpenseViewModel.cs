@@ -10,5 +10,6 @@ namespace Expense.Models
         public string AuthLevel { get; set; }
         public IEnumerable<Expense> Expenses { get; set; }
         public Guid FormId { get; set; }
+        public string FormState { get; set; }
     }
 }

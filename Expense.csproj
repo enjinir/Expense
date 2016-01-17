@@ -252,6 +252,7 @@
       <DependentUpon>Expenses.edmx</DependentUpon>
       <LastGenOutput>Expenses.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Expense Publish Profile.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap\jquery-1.12.0.js" />
     <Content Include="Scripts\bootstrap\jquery-1.12.0.min.js" />
@@ -291,6 +292,7 @@
     <Content Include="Views\Form\ApprovedList.cshtml" />
     <Content Include="Views\Form\Reject.cshtml" />
     <Content Include="Views\Form\RejectList.cshtml" />
+    <Content Include="Views\Form\PaidList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

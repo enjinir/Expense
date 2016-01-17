@@ -33,6 +33,8 @@ namespace Expense.Controllers
                     Menu.Add(new MenuItem("Add Expense", "New", "Expense"));
                     Menu.Add(new MenuItem("Approved", "ApprovedList", "Form"));
                     Menu.Add(new MenuItem("Rejected", "RejectList", "Form"));
+                    Menu.Add(new MenuItem("Paid", "PaidList", "Form"));
+
 
                 }
 
@@ -43,6 +45,10 @@ namespace Expense.Controllers
                     Menu.Add(new MenuItem("Add Expense", "New", "Expense", null));
                     Menu.Add(new MenuItem("Forms", "List", "Form"));
                     Menu.Add(new MenuItem("Approved", "ApprovedList", "Form"));
+                    Menu.Add(new MenuItem("Rejected", "RejectList", "Form"));
+                    Menu.Add(new MenuItem("Paid", "PaidList", "Form"));
+
+
 
                 }
                 //Accountant
@@ -50,6 +56,8 @@ namespace Expense.Controllers
                 {
                     Menu.Add(new MenuItem("Home", "Index", "Home"));
                     Menu.Add(new MenuItem("Forms", "ApprovedList", "Form"));
+                    Menu.Add(new MenuItem("Paid", "PaidList", "Form"));
+
                 }
 
                 //Manager
@@ -58,6 +66,10 @@ namespace Expense.Controllers
                     Menu.Add(new MenuItem("Home", "Index", "Home"));
                     Menu.Add(new MenuItem("Forms", "List", "Form"));
                     Menu.Add(new MenuItem("Approved", "ApprovedList", "Form"));
+                    Menu.Add(new MenuItem("Rejected", "RejectList", "Form"));
+                    Menu.Add(new MenuItem("Paid", "PaidList", "Form"));
+
+
                 }
             }
 
