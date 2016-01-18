@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c2b92ef10ad64e97b1b2c99202cb19d9" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="ExpenseModel.Expense" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ExpenseModel.Form" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ExpenseModel.Role" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ExpenseModel.State" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ExpenseModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="ExpenseModel.FK_Expense_Form" ManuallyRouted="false" />
-        <AssociationConnector Association="ExpenseModel.FK_Expense_State" ManuallyRouted="false" />
-        <AssociationConnector Association="ExpenseModel.FK_Form_State" ManuallyRouted="false" />
-        <AssociationConnector Association="ExpenseModel.FK_Form_User" ManuallyRouted="false" />
-        <AssociationConnector Association="ExpenseModel.FK_User_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="ExpenseModel.FK_User_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ExpenseModel.Expense" Width="1.5" PointX="7.5" PointY="1.25" />
+        <EntityTypeShape EntityType="ExpenseModel.Form" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="ExpenseModel.Role" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="ExpenseModel.State" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="ExpenseModel.User" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="ExpenseModel.FK_Expense_Form" />
+        <AssociationConnector Association="ExpenseModel.FK_Expense_State" />
+        <AssociationConnector Association="ExpenseModel.FK_Form_State" />
+        <AssociationConnector Association="ExpenseModel.FK_Form_User" />
+        <AssociationConnector Association="ExpenseModel.FK_User_Role" />
+        <AssociationConnector Association="ExpenseModel.FK_User_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

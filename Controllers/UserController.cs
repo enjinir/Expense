@@ -41,7 +41,8 @@ namespace Expense.Controllers
 
                 return RedirectToAction("Index","Home");
             }
-            SessionManager.Register(SessionManager.Keys.LoggedIn, false);
+
+            SessionManager.Register(SessionManager.Keys.LoggedIn, null);
             
 
             return View();

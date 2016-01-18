@@ -170,9 +170,26 @@ namespace Expense.Controllers
             {
                 e.StateId = state.Id;
             }
+            
             db.SaveChanges();
 
+            AddExpenseToCrm(form);
+
             return RedirectToAction("List", "Form");
+        }
+
+        private void AddExpenseToCrm(Form form)
+        {
+            var client = new CashFlowIntegrationService.CashFlowIntegrationServiceClient();
+
+            CashFlowIntegrationService.Expense expense = new CashFlowIntegrationService.Expense()
+            {
+                Cost = (double)form.Total,
+                Description = form.Name,
+                Direction = false
+            };
+
+            client.AddExpense(expense);
         }
 
         public ActionResult Reject(Guid id)

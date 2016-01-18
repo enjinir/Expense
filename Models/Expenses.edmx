@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ExpenseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ExpenseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Expense">
           <Key>
             <PropertyRef Name="Id" />
@@ -165,74 +165,105 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ExpenseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ExpenseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Expenses" EntityType="ExpenseModel.Expense" />
+          <EntitySet Name="Forms" EntityType="ExpenseModel.Form" />
+          <EntitySet Name="Roles" EntityType="ExpenseModel.Role" />
+          <EntitySet Name="States" EntityType="ExpenseModel.State" />
+          <EntitySet Name="Users" EntityType="ExpenseModel.User" />
+          <AssociationSet Name="FK_Expense_Form" Association="ExpenseModel.FK_Expense_Form">
+            <End Role="Form" EntitySet="Forms" />
+            <End Role="Expense" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expense_State" Association="ExpenseModel.FK_Expense_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Expense" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form_State" Association="ExpenseModel.FK_Form_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Form" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Form_User" Association="ExpenseModel.FK_Form_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Form" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="ExpenseModel.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User" Association="ExpenseModel.FK_User_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Expense">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StateId" Type="Guid" Nullable="false" />
           <Property Name="Cost" Type="Int32" Nullable="false" />
           <Property Name="FormId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Form" Relationship="Self.FK_Expense_Form" FromRole="Expense" ToRole="Form" />
-          <NavigationProperty Name="State" Relationship="Self.FK_Expense_State" FromRole="Expense" ToRole="State" />
+          <NavigationProperty Name="Form" Relationship="ExpenseModel.FK_Expense_Form" FromRole="Expense" ToRole="Form" />
+          <NavigationProperty Name="State" Relationship="ExpenseModel.FK_Expense_State" FromRole="Expense" ToRole="State" />
         </EntityType>
         <EntityType Name="Form">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="OwnerId" Type="Guid" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ManagerDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Total" Type="Int32" Nullable="false" />
           <Property Name="StateId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Expenses" Relationship="Self.FK_Expense_Form" FromRole="Form" ToRole="Expense" />
-          <NavigationProperty Name="State" Relationship="Self.FK_Form_State" FromRole="Form" ToRole="State" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Form_User" FromRole="Form" ToRole="User" />
+          <NavigationProperty Name="Expenses" Relationship="ExpenseModel.FK_Expense_Form" FromRole="Form" ToRole="Expense" />
+          <NavigationProperty Name="State" Relationship="ExpenseModel.FK_Form_State" FromRole="Form" ToRole="State" />
+          <NavigationProperty Name="User" Relationship="ExpenseModel.FK_Form_User" FromRole="Form" ToRole="User" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AuthorizeLevel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="ExpenseModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Expenses" Relationship="Self.FK_Expense_State" FromRole="State" ToRole="Expense" />
-          <NavigationProperty Name="Forms" Relationship="Self.FK_Form_State" FromRole="State" ToRole="Form" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Expenses" Relationship="ExpenseModel.FK_Expense_State" FromRole="State" ToRole="Expense" />
+          <NavigationProperty Name="Forms" Relationship="ExpenseModel.FK_Form_State" FromRole="State" ToRole="Form" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="Guid" />
           <Property Name="ManagerId" Type="Guid" />
-          <NavigationProperty Name="Forms" Relationship="Self.FK_Form_User" FromRole="User" ToRole="Form" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_User_User" FromRole="User" ToRole="User1" />
-          <NavigationProperty Name="User2" Relationship="Self.FK_User_User" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="Forms" Relationship="ExpenseModel.FK_Form_User" FromRole="User" ToRole="Form" />
+          <NavigationProperty Name="Role" Relationship="ExpenseModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="User1" Relationship="ExpenseModel.FK_User_User" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="User2" Relationship="ExpenseModel.FK_User_User" FromRole="User1" ToRole="User" />
         </EntityType>
         <Association Name="FK_Expense_Form">
-          <End Role="Form" Type="Self.Form" Multiplicity="1" />
-          <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+          <End Type="ExpenseModel.Form" Role="Form" Multiplicity="1" />
+          <End Type="ExpenseModel.Expense" Role="Expense" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Form">
               <PropertyRef Name="Id" />
@@ -243,8 +274,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Expense_State">
-          <End Role="State" Type="Self.State" Multiplicity="1" />
-          <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+          <End Type="ExpenseModel.State" Role="State" Multiplicity="1" />
+          <End Type="ExpenseModel.Expense" Role="Expense" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
               <PropertyRef Name="Id" />
@@ -255,8 +286,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Form_State">
-          <End Role="State" Type="Self.State" Multiplicity="1" />
-          <End Role="Form" Type="Self.Form" Multiplicity="*" />
+          <End Type="ExpenseModel.State" Role="State" Multiplicity="1" />
+          <End Type="ExpenseModel.Form" Role="Form" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
               <PropertyRef Name="Id" />
@@ -267,8 +298,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Form_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Form" Type="Self.Form" Multiplicity="*" />
+          <End Type="ExpenseModel.User" Role="User" Multiplicity="1" />
+          <End Type="ExpenseModel.Form" Role="Form" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -279,8 +310,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="ExpenseModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="ExpenseModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -291,8 +322,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="User1" Type="Self.User" Multiplicity="*" />
+          <End Type="ExpenseModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="ExpenseModel.User" Role="User1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -302,67 +333,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ExpenseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Expenses" EntityType="Self.Expense" />
-          <EntitySet Name="Forms" EntityType="Self.Form" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="States" EntityType="Self.State" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_Expense_Form" Association="Self.FK_Expense_Form">
-            <End Role="Form" EntitySet="Forms" />
-            <End Role="Expense" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Expense_State" Association="Self.FK_Expense_State">
-            <End Role="State" EntitySet="States" />
-            <End Role="Expense" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Form_State" Association="Self.FK_Form_State">
-            <End Role="State" EntitySet="States" />
-            <End Role="Form" EntitySet="Forms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Form_User" Association="Self.FK_Form_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Form" EntitySet="Forms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="User1" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ExpenseModelStoreContainer" CdmEntityContainer="ExpenseEntities">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExpenseModelStoreContainer" CdmEntityContainer="ExpenseEntities">
           <EntitySetMapping Name="Expenses">
             <EntityTypeMapping TypeName="ExpenseModel.Expense">
               <MappingFragment StoreEntitySet="Expense">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Forms">
             <EntityTypeMapping TypeName="ExpenseModel.Form">
               <MappingFragment StoreEntitySet="Form">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ManagerDescription" ColumnName="ManagerDescription" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ManagerDescription" ColumnName="ManagerDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -370,36 +370,35 @@
             <EntityTypeMapping TypeName="ExpenseModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="AuthorizeLevel" ColumnName="AuthorizeLevel" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
             <EntityTypeMapping TypeName="ExpenseModel.State">
               <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="ExpenseModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -413,7 +412,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

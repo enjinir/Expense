@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9a470a29-8551-4543-a22f-b6124a837762" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://crm2013-4/Implementations/CashFlowIntegrationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CashFlowIntegrationService.disco" MetadataType="Disco" ID="36a2c431-052a-40a4-9828-c2aa3f9075a4" SourceId="1" SourceUrl="http://crm2013-4/Implementations/CashFlowIntegrationService.svc?disco" />
+    <MetadataFile FileName="CashFlowIntegrationService.xsd" MetadataType="Schema" ID="9c0239ac-9527-487a-a74e-0f94b55b2c15" SourceId="1" SourceUrl="http://crm2013-4/Implementations/CashFlowIntegrationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CashFlowIntegrationService1.xsd" MetadataType="Schema" ID="28f467af-80b4-452b-bac4-9a7bac0a3f2e" SourceId="1" SourceUrl="http://crm2013-4/Implementations/CashFlowIntegrationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CashflowIntegrationService.wsdl" MetadataType="Wsdl" ID="77c7a22e-0664-446a-a56a-d50715bdaeb7" SourceId="1" SourceUrl="http://crm2013-4/Implementations/CashFlowIntegrationService.svc?wsdl" />
+    <MetadataFile FileName="CashFlowIntegrationService2.xsd" MetadataType="Schema" ID="3cf0f0ca-7425-4ee5-a3c6-612f4ac724b9" SourceId="1" SourceUrl="http://crm2013-4/Implementations/CashFlowIntegrationService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

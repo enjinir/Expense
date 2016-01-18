@@ -46,6 +46,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -175,6 +176,11 @@
       <DependentUpon>Expenses.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\CashFlowIntegrationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\bootstrap.css" />
@@ -247,6 +253,7 @@
     <Content Include="Models\Expenses.edmx.diagram">
       <DependentUpon>Expenses.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\Expenses.edmx.sql" />
     <Content Include="Models\Expenses.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Expenses.edmx</DependentUpon>
@@ -272,6 +279,13 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\CashFlowIntegrationService\CashFlowIntegrationService.disco" />
+    <None Include="Service References\CashFlowIntegrationService\configuration91.svcinfo" />
+    <None Include="Service References\CashFlowIntegrationService\configuration.svcinfo" />
+    <None Include="Service References\CashFlowIntegrationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -293,6 +307,16 @@
     <Content Include="Views\Form\Reject.cshtml" />
     <Content Include="Views\Form\RejectList.cshtml" />
     <Content Include="Views\Form\PaidList.cshtml" />
+    <None Include="Service References\CashFlowIntegrationService\CashflowIntegrationService.wsdl" />
+    <None Include="Service References\CashFlowIntegrationService\CashFlowIntegrationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CashFlowIntegrationService\CashFlowIntegrationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CashFlowIntegrationService\CashFlowIntegrationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -302,6 +326,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CashFlowIntegrationService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
