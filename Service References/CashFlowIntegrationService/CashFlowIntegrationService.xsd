@@ -13,4 +13,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetExpenses">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExpensesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/CashflowIntegrationService" minOccurs="0" name="GetExpensesResult" nillable="true" type="q2:ArrayOfExpense" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -99,6 +99,12 @@ namespace Expense.CashFlowIntegrationService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICashFlowIntegrationService/AddExpense", ReplyAction="http://tempuri.org/ICashFlowIntegrationService/AddExpenseResponse")]
         System.Threading.Tasks.Task AddExpenseAsync(CashFlowIntegrationService.Expense expense);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICashFlowIntegrationService/GetExpenses", ReplyAction="http://tempuri.org/ICashFlowIntegrationService/GetExpensesResponse")]
+        CashFlowIntegrationService.Expense[] GetExpenses();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICashFlowIntegrationService/GetExpenses", ReplyAction="http://tempuri.org/ICashFlowIntegrationService/GetExpensesResponse")]
+        System.Threading.Tasks.Task<CashFlowIntegrationService.Expense[]> GetExpensesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -134,6 +140,14 @@ namespace Expense.CashFlowIntegrationService {
         
         public System.Threading.Tasks.Task AddExpenseAsync(CashFlowIntegrationService.Expense expense) {
             return base.Channel.AddExpenseAsync(expense);
+        }
+        
+        public CashFlowIntegrationService.Expense[] GetExpenses() {
+            return base.Channel.GetExpenses();
+        }
+        
+        public System.Threading.Tasks.Task<CashFlowIntegrationService.Expense[]> GetExpensesAsync() {
+            return base.Channel.GetExpensesAsync();
         }
     }
 }

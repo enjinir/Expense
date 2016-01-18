@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ExpenseApiController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Helpers\Menu.cs" />
     <Compile Include="Helpers\MenuItem.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
+    <Compile Include="Models\CrmExpenseModel.cs" />
     <Compile Include="Models\Expense.cs">
       <DependentUpon>Expenses.tt</DependentUpon>
     </Compile>
@@ -263,6 +265,8 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap\jquery-1.12.0.js" />
     <Content Include="Scripts\bootstrap\jquery-1.12.0.min.js" />
+    <Content Include="Scripts\home.js" />
+    <Content Include="Scripts\jquery.piegraph.js" />
     <Content Include="Scripts\new_expense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -282,6 +286,9 @@
     <None Include="Service References\CashFlowIntegrationService\CashFlowIntegrationService.disco" />
     <None Include="Service References\CashFlowIntegrationService\configuration91.svcinfo" />
     <None Include="Service References\CashFlowIntegrationService\configuration.svcinfo" />
+    <Content Include="Service References\CashFlowIntegrationService\Expense.CashFlowIntegrationService.Expense.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\CashFlowIntegrationService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

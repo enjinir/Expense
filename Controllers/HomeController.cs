@@ -1,4 +1,5 @@
 ﻿using Expense.Helpers;
+using Expense.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Expense.Controllers
             ViewBag.Username = SessionManager.Get(SessionManager.Keys.Username);
             ViewBag.FullName = SessionManager.Get(SessionManager.Keys.FullName);
             ViewBag.RoleName = SessionManager.Get(SessionManager.Keys.RoleName);
+           
+
             return View();
         }
 
